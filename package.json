@@ -12,7 +12,7 @@
 		"seed:categories": "node scripts/seed-categories.js"
 	},
 	"dependencies": {
-		"@clerk/nextjs": "^4.25.3",
+		"@clerk/nextjs": "^6.22.0",
 		"@hello-pangea/dnd": "^16.3.0",
 		"@hookform/resolvers": "^3.3.1",
 		"@livekit/components-react": "^1.4.0",
@@ -36,7 +36,7 @@
 		"@types/react-dom": "18.2.10",
 		"@uploadthing/react": "^5.6.2",
 		"autoprefixer": "10.4.16",
-		"axios": "^1.5.1",
+		"axios": "^1.10.0",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.0.0",
 		"cmdk": "^0.2.0",
@@ -46,9 +46,9 @@
 		"livekit-server-sdk": "^1.2.7",
 		"lucide-react": "^0.284.0",
 		"moment": "^2.29.4",
-		"next": "^13.4.12",
+		"next": "^15.3.3",
 		"next-themes": "^0.2.1",
-		"postcss": "8.4.31",
+		"postcss": "8.5.6",
 		"query-string": "^8.1.0",
 		"react": "18.2.0",
 		"react-confetti": "^6.1.0",
@@ -65,7 +65,7 @@
 		"tailwindcss-animate": "^1.0.7",
 		"typescript": "5.2.2",
 		"uploadthing": "^5.7.1",
-		"zod": "^3.22.4",
+		"zod": "^3.25.67",
 		"zustand": "^4.4.4"
 	},
 	"devDependencies": {
