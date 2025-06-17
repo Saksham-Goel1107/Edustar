@@ -13,6 +13,7 @@
 	},
 	"dependencies": {
 		"@clerk/nextjs": "^4.25.3",
+		"@google/generative-ai": "^0.24.1",
 		"@hello-pangea/dnd": "^16.3.0",
 		"@hookform/resolvers": "^3.3.1",
 		"@livekit/components-react": "^1.4.0",
@@ -31,6 +32,7 @@
 		"@radix-ui/react-slot": "^1.0.2",
 		"@radix-ui/react-tooltip": "^1.0.7",
 		"@tanstack/react-table": "^8.10.7",
+		"@types/ioredis": "^4.28.10",
 		"@types/node": "20.8.2",
 		"@types/react": "18.2.25",
 		"@types/react-dom": "18.2.10",
@@ -42,6 +44,7 @@
 		"cmdk": "^0.2.0",
 		"eslint": "8.50.0",
 		"eslint-config-next": "13.5.4",
+		"ioredis": "^5.6.1",
 		"livekit-client": "^1.14.4",
 		"livekit-server-sdk": "^1.2.7",
 		"lucide-react": "^0.284.0",
@@ -65,6 +68,7 @@
 		"tailwindcss-animate": "^1.0.7",
 		"typescript": "5.2.2",
 		"uploadthing": "^5.7.1",
+		"uuid": "^11.1.0",
 		"zod": "^3.22.4",
 		"zustand": "^4.4.4"
 	},

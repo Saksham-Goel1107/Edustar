@@ -150,6 +150,14 @@ MUX_TOKEN_SECRET=your_mux_token_secret
 STRIPE_API_KEY=your_stripe_api_key
 STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
 NEXT_PUBLIC_APP_URL=http://localhost:3000
+
+# Gemini api Keys
+GEMINI_API_KEY=your_gemini_api
+
+# Redis Setup
+REDIS_URL=your_redis_url
+REDIS_USERNAME=example_user
+REDIS_PASSWORD=example_password
 ```
 
 ## 📘 Usage

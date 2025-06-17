@@ -7,6 +7,7 @@ import ConfettiProvider from '@/components/providers/confetti-provider';
 import { ThemeProvider } from '@/components/theme-provider';
 import FacebookMessenger from '@/components/facebook-messenger';
 import { isTeacher } from '@/lib/teacher';
+import Providers from './Provider'
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -36,7 +37,11 @@ export default function RootLayout({
 
 						<ToastProvider />
 
-						{children}
+						{userId ? (
+							<Providers>{children}</Providers>
+						) : (
+							<>{children}</>
+						)}
 					</ThemeProvider>
 				</body>
 
