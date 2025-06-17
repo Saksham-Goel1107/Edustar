@@ -11,8 +11,8 @@ import { isTeacher } from '@/lib/teacher';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-	title: 'LMS',
-	description: 'This is an lms platform',
+	title: 'EduStar | Advanced Learning Management System',
+	description: 'Transform your educational journey with EduStar LMS - The premier platform for interactive courses, expert instruction, and personalized learning experiences.',
 };
 
 export default function RootLayout({
