@@ -3,6 +3,7 @@
 import { cn } from '@/lib/utils';
 import { Book } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
+import { useTheme } from 'next-themes';
 
 interface CourseSidebarItem3Props {
 	label?: string;
@@ -24,25 +25,35 @@ const CourseSidebarItem3 = ({
 		router.push(`/courses/${courseId}/detail`);
 	};
 
+	const { resolvedTheme } = useTheme();
+
 	return (
 		<button
 			onClick={onClick}
 			type="button"
 			className={cn(
-				'flex items-center gap-x-2 text-slate-500 text-sm font-[500] pl-6 transition-all hover:text-slate-600 hover:bg-slate-300/20',
-				isActive &&
-					'text-slate-700 bg-slate-200/20 hover:bg-slate-200/20 hover:text-slate-700',
-				isCompleted && 'text-emerald-700 hover:text-emerald-700',
-				isCompleted && isActive && 'bg-emerald-200/20'
+				"flex items-center gap-x-2 text-sm font-[500] pl-6 transition-all",
+				resolvedTheme === 'dark' 
+					? "text-white hover:text-white hover:bg-slate-700/50" 
+					: "text-slate-500 hover:text-slate-700 hover:bg-slate-200/20",
+				isActive && resolvedTheme === 'dark'
+					? "bg-slate-700/50 text-white" 
+					: isActive && "bg-slate-200/20 text-slate-700",
+				isCompleted && resolvedTheme === 'dark'
+					? "text-emerald-300 hover:text-emerald-200" 
+					: isCompleted && "text-emerald-700 hover:text-emerald-700",
+				isCompleted && isActive && resolvedTheme === 'dark'
+					? "bg-emerald-800/30" 
+					: isCompleted && isActive && "bg-emerald-200/20"
 			)}
 		>
 			<div className="flex items-center gap-x-2 py-4">
 				<Book
 					size={22}
 					className={cn(
-						'text-slate-500',
-						isActive && 'text-slate-700',
-						isCompleted && 'text-emerald-700'
+						resolvedTheme === 'dark' ? 'text-white' : 'text-slate-500',
+						isActive && resolvedTheme === 'dark' ? 'text-white' : isActive && 'text-slate-700',
+						isCompleted && resolvedTheme === 'dark' ? 'text-emerald-300' : isCompleted && 'text-emerald-700'
 					)}
 				/>
 
