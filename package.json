@@ -12,7 +12,7 @@
 		"seed:categories": "node scripts/seed-categories.js"
 	},
 	"dependencies": {
-		"@clerk/nextjs": "^4.25.3",
+		"@clerk/nextjs": "^6.22.0",
 		"@google/generative-ai": "^0.24.1",
 		"@hello-pangea/dnd": "^16.3.0",
 		"@hookform/resolvers": "^3.3.1",
@@ -49,9 +49,9 @@
 		"livekit-server-sdk": "^1.2.7",
 		"lucide-react": "^0.284.0",
 		"moment": "^2.29.4",
-		"next": "^13.4.12",
+		"next": "^15.3.3",
 		"next-themes": "^0.2.1",
-		"postcss": "8.4.31",
+		"postcss": "8.5.6",
 		"query-string": "^8.1.0",
 		"react": "18.2.0",
 		"react-confetti": "^6.1.0",
