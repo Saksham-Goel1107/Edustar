@@ -5,22 +5,24 @@ import { usePathname } from 'next/navigation';
 import { Button } from './ui/button';
 import Link from 'next/link';
 import SearchInput from './search-input';
-// import { isTeacher } from '@/lib/teacher';
+import { isTeacher } from '@/lib/teacher';
 import { ModeToggle } from './mode-toggle';
 import { LogOut } from 'lucide-react';
+import { useAuth } from '@clerk/nextjs';
 
 const NavbarRoutes = () => {
-	// const { userId } = useAuth();
-
+	const { userId } = useAuth();
 	const pathname = usePathname();
 
-	// const isTeacherPage = pathname?.startsWith('/teacher');
-	// const isCoursePage = pathname?.includes('/courses');
+	const isTeacherUser = isTeacher(userId);
 	const isSearchPage = pathname?.startsWith('/search');
+
+	// Determine where the exit button should go based on user role
+	const exitHref = isTeacherUser ? '/teacher/courses' : '/';
 
 	return (
 		<>
-			{isSearchPage && (
+			{isSearchPage && !isTeacherUser && (
 				<div className="hidden md:block">
 					<SearchInput />
 				</div>
@@ -31,10 +33,10 @@ const NavbarRoutes = () => {
 					<ModeToggle />
 				</div>
 
-				<Link href="/">
+				<Link href={exitHref}>
 					<Button size={'sm'} variant={'ghost'}>
 						<LogOut className="h-4 w-4 mr-2" />
-						Exit
+						{isTeacherUser ? 'Dashboard' : 'Exit'}
 					</Button>
 				</Link>
 

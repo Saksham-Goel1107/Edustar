@@ -44,8 +44,13 @@ const teacherRoutes = [
 	},
 	{
 		icon: BarChart,
-		label: 'Analystics',
+		label: 'Analytics',
 		href: '/teacher/analytics',
+	},
+	{
+		icon: Phone,
+		label: 'Video Call',
+		href: '/teacher/channel', // Teacher-specific route to the same shared channel
 	},
 ];
 
