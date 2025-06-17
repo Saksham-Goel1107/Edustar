@@ -83,7 +83,7 @@ export async function GET(
 ) {
 	try {
 		const { userId } = auth();
-
+		const { courseId } = params;
 		if (!userId) {
 			return new NextResponse('Unauthorized', { status: 401 });
 		}
@@ -98,13 +98,15 @@ export async function GET(
 					include: { userProgresses: { where: { userId } } },
 					orderBy: { position: 'asc' },
 				},
+				purchases: {
+					where: { userId }
+				},
 			},
 		});
 
 		if (!course) {
-			return new NextResponse('Unauthorized', { status: 401 });
+			return new NextResponse('Not Found', { status: 404 });
 		}
-
 		return NextResponse.json(course);
 	} catch (error) {
 		console.log('[ERROR] GET /api/courses/[courseId]', error);

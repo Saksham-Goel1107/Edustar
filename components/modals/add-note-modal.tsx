@@ -9,7 +9,7 @@ import {
 	AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 
-import { useState } from 'react';
+import { useTheme } from 'next-themes';
 import { Editor } from '@/components/editor';
 
 interface AddNoteModalProps {
@@ -25,6 +25,8 @@ const AddNoteModal = ({
 	setContent,
 	onAdd,
 }: AddNoteModalProps) => {
+	const { resolvedTheme } = useTheme();
+
 	return (
 		<AlertDialog>
 			<AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
@@ -34,7 +36,7 @@ const AddNoteModal = ({
 					<AlertDialogTitle>Add new note</AlertDialogTitle>
 				</AlertDialogHeader>
 
-				<div className="mt-6 border bg-slate-100 rounded-md p-4">
+				<div className={`mt-6 border ${resolvedTheme === 'dark' ? 'bg-slate-800 border-slate-600' : 'bg-slate-100 border-slate-200'}  rounded-md p-4`}>
 					<div className="font-medium flex items-center justify-between">
 						Your note
 					</div>

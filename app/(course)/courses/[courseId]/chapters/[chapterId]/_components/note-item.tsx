@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Pencil, Trash2 } from 'lucide-react';
 import moment from 'moment';
 import { useRouter } from 'next/navigation';
+import { useTheme } from 'next-themes';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 
@@ -69,8 +70,10 @@ const NoteItem = ({ data, courseId, chapterId, setIsNeedRefresh }: Props) => {
 		}
 	};
 
+	const {resolvedTheme} = useTheme()
+
 	return (
-		<div key={data.id} className="bg-gray-100 rounded-md mt-4 flex flex-col">
+		<div key={data.id} className={`${resolvedTheme?"bg-gray-800":"bg-gray-100"} rounded-md mt-4 flex flex-col`}>
 			<div className="px-4 pt-4 flex items-center justify-between">
 				<p className="text-gray-500 mb-2">
 					{moment(data.createdAt).format('DD-MM-YYYY HH:mm:ss')}
