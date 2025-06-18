@@ -1,6 +1,7 @@
 import { Preview } from '@/components/preview';
 import { Star } from 'lucide-react';
 import Image from 'next/image';
+import {useTheme} from "next-themes"
 
 interface FeedbackItemProps {
 	imageUrl: string;
@@ -17,6 +18,7 @@ const FeedbackItem = ({
 	content,
 	rating,
 }: FeedbackItemProps) => {
+	const { resolvedTheme } = useTheme();
 	return (
 		<div className="border border-blue-200 rounded-md p-4">
 			<div className="flex">
@@ -31,7 +33,7 @@ const FeedbackItem = ({
 
 				<div className="ml-4">
 					<div className="flex items-center">
-						<div className="font-bold text-sm text-slate-800">{fullName}</div>
+						<div className={`font-bold text-sm ${resolvedTheme==='dark'?"text-slate-100":"text-slate-800"}`}>{fullName}</div>
 
 						<div className="px-2">•</div>
 

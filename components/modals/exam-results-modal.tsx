@@ -14,6 +14,7 @@ import {
 import { cn } from '@/lib/utils';
 import { Chapter } from '@prisma/client';
 import Link from 'next/link';
+import { useTheme } from 'next-themes';
 
 interface ExamResultsModalProps {
 	chapters: Chapter[];
@@ -30,6 +31,7 @@ const ExamResultsModal = ({
 	children,
 	onConfirm,
 }: ExamResultsModalProps) => {
+	const {resolvedTheme} = useTheme()
 	return (
 		<AlertDialog>
 			<AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
@@ -52,7 +54,7 @@ const ExamResultsModal = ({
 
 						{chapters?.length > 0 && (
 							<div>
-								<p className="mt-4 text-base font-semibold text-gray-800">
+								<p className={`mt-4 text-base font-semibold ${resolvedTheme === "dark"?"text-slate-100":"text-gray-800"}`}>
 									Chapters you should re-study to consolidate your knowledge
 									more firmly:
 								</p>

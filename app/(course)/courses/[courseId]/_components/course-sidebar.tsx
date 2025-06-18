@@ -1,7 +1,7 @@
+'use client';
+
 import { db } from '@/lib/db';
-import { auth } from '@clerk/nextjs';
-import { Chapter, Course, UserProgress } from '@prisma/client';
-import { redirect } from 'next/navigation';
+import { Chapter, Course, UserProgress, Purchase } from '@prisma/client';
 import CourseSidebarItem from './course-sidebar-item';
 import CourseProgress from '@/components/course-progress';
 import CourseSidebarItem2 from './course-sidebar-item-2';
@@ -14,21 +14,10 @@ interface CourseSidebarProps {
 		})[];
 	};
 	progressCount: number;
+	purchase: Purchase | null;
 }
 
-const CourseSidebar = async ({ course, progressCount }: CourseSidebarProps) => {
-	const { userId } = auth();
-
-	if (!userId) return redirect('/');
-
-	const purchase = await db.purchase.findUnique({
-		where: {
-			userId_courseId: {
-				userId,
-				courseId: course.id,
-			},
-		},
-	});
+const CourseSidebar = ({ course, progressCount, purchase }: CourseSidebarProps) => {
 
 	return (
 		<div className="h-full border-r flex flex-col overflow-y-auto shadow-sm dark:border-r-slate-700">

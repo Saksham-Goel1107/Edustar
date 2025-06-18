@@ -123,11 +123,7 @@ const CourseDetailPage = ({ params }: { params: { courseId: string } }) => {
 
 				setCourse(courseData);
 				
-				console.log("Purchase status:", { 
-					isPurchased: verifyRes.data.purchased,
-					courseHasPurchases: Boolean(courseData.purchases?.length),
-					purchases: courseData.purchases
-				});
+				
 			} catch (error) {
 				console.log("Error checking purchase:", error);
 			}

@@ -19,6 +19,20 @@ export async function GET(
 			return new NextResponse('Unauthorized', { status: 401 });
 		}
 
+		// Check if the user has purchased the course
+		const purchase = await db.purchase.findUnique({
+			where: {
+				userId_courseId: {
+					userId,
+					courseId: params.courseId,
+				},
+			},
+		});
+
+		if (!purchase) {
+			return new NextResponse('Purchase required', { status: 403 });
+		}
+
 		const questions = await db.question.findMany({
 			where: {
 				courseId: params.courseId,

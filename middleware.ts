@@ -7,12 +7,13 @@ const isTeacher = (userId?: string | null) => {
 
 export default authMiddleware({
   publicRoutes: [
-    '/api/webhook', 
-    '/sign-in', 
-    '/sign-in/[[...sign-in]]',
+    '/api/webhook',
+    '/sign-in',
+    '/sign-in/(.*)',
     '/sign-up',
-    '/sign-up/[[...sign-up]]',
-    '/_clerk/:path*',
+    '/sign-up/(.*)',
+    '/_clerk/(.*)',
+    '/favicon.ico',
   ],
   afterAuth(auth, req) {
     const path = req.nextUrl.pathname;
@@ -47,10 +48,5 @@ export default authMiddleware({
 });
 
 export const config = {
-
-  matcher: [
-    '/((?!.+\\.[\\w]+$|_next).*)',
-    '/',
-    '/(api|trpc)(.*)'
-  ],
+  matcher: ["/((?!.+\\.[\\w]+$|_next).*)","/","/(api|trpc)(.*)"],
 };

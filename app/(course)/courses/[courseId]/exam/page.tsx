@@ -26,6 +26,8 @@ const ExamPage = ({ params }: { params: { courseId: string } }) => {
 	const [questions, setQuestions] = useState<QuestionWithAnswers[]>();
 	const [chapters, setChapters] = useState<Chapter[]>([]);
 	const [exactRate, setExactRate] = useState(0);
+	const [isLoading, setIsLoading] = useState(true);
+	const [hasPurchased, setHasPurchased] = useState(false);
 
 	const router = useRouter();
 
@@ -60,8 +62,21 @@ const ExamPage = ({ params }: { params: { courseId: string } }) => {
 
 	// useEffect
 	useEffect(() => {
-		(async () => {
+		const checkPurchaseStatus = async () => {
 			try {
+				const { data } = await axios.get(
+					`/api/courses/${params.courseId}/verify-purchase`
+				);
+
+				if (!data.purchased) {
+					// Redirect if not purchased
+					router.push(`/courses/${params.courseId}`);
+					return;
+				}
+
+				setHasPurchased(true);
+
+				// Fetch questions only if purchased
 				const res = await axios.get(
 					`/api/courses/${params.courseId}/questions`
 				);
@@ -72,10 +87,15 @@ const ExamPage = ({ params }: { params: { courseId: string } }) => {
 					setQuestions(resQuestions);
 				}
 			} catch (error) {
-				console.log(error);
+				console.log('Error checking purchase or fetching questions:', error);
+				router.push(`/courses/${params.courseId}`);
+			} finally {
+				setIsLoading(false);
 			}
-		})();
-	}, [params.courseId]);
+		};
+
+		checkPurchaseStatus();
+	}, [params.courseId, router]);
 
 	// function
 	function onSubmit(data: z.infer<typeof FormSchema>) {
@@ -151,27 +171,46 @@ const ExamPage = ({ params }: { params: { courseId: string } }) => {
 					<h3 className="text-5xl text-center">Final Exam</h3>
 				</div>
 
-				<Form {...form}>
-					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-						{questions?.map((question, index) => (
-							<FormField
-								key={question.id}
-								control={form.control}
-								name={
-									`items${index + 1}` as
-										| 'items1'
-										| 'items2'
-										| 'items3'
-										| 'items4'
-										| 'items5'
-								}
-								render={() => {
-									const answers = question.answers ? [...question.answers] : [];
+				{isLoading ? (
+					<div className="text-center py-10">
+						<p className="text-lg">Loading exam questions...</p>
+					</div>
+				) : !hasPurchased ? (
+					<div className="text-center py-10">
+						<p className="text-lg">You need to purchase this course to access the exam.</p>
+						<Button 
+							onClick={() => router.push(`/courses/${params.courseId}`)}
+							className="mt-4"
+						>
+							Back to Course
+						</Button>
+					</div>
+				) : !questions || questions.length === 0 ? (
+					<div className="text-center py-10">
+						<p className="text-lg">No exam questions are available for this course.</p>
+					</div>
+				) : (
+					<Form {...form}>
+						<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+							{questions.map((question, index) => (
+								<FormField
+									key={question.id}
+									control={form.control}
+									name={
+										`items${index + 1}` as
+											| 'items1'
+											| 'items2'
+											| 'items3'
+											| 'items4'
+											| 'items5'
+									}
+									render={() => {
+										const answers = question.answers ? [...question.answers] : [];
 
-									const items = answers.map((answer) => ({
-										id: answer.value,
-										label: answer.label,
-									}));
+										const items = answers.map((answer) => ({
+											id: answer.value,
+											label: answer.label,
+										}));
 
 									return (
 										<FormItem>
@@ -242,6 +281,7 @@ const ExamPage = ({ params }: { params: { courseId: string } }) => {
 						</ExamResultsModal>
 					</form>
 				</Form>
+				)}
 			</div>
 		</div>
 	);
